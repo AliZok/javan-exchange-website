@@ -86,40 +86,7 @@ export function HeroSection() {
                 className="w-full max-w-md mx-auto rounded-2xl shadow-2xl"
               />
             </div>
-            {/* Floating Cards */}
-            <div className="absolute top-10 -right-8 bg-card p-4 rounded-xl shadow-lg border border-primary/20">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
-                  <span className="text-primary text-lg font-bold">$</span>
-                </div>
-                <div>
-                  <div className="text-xs text-muted-foreground">دلار آمریکا</div>
-                  <div className="font-bold text-foreground">۱۸۲,۸۷۰ تومان</div>
-                </div>
-              </div>
-            </div>
-            <div className="absolute bottom-10 -left-8 bg-card p-4 rounded-xl shadow-lg border border-primary/20">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
-                  <span className="text-primary text-lg font-bold">€</span>
-                </div>
-                <div>
-                  <div className="text-xs text-muted-foreground">یورو</div>
-                  <div className="font-bold text-foreground">۲۱۵,۲۷۰ تومان</div>
-                </div>
-              </div>
-            </div>
-            <div className="absolute top-1/2 -left-4 bg-card p-4 rounded-xl shadow-lg border border-primary/20">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
-                  <span className="text-primary text-lg font-bold">£</span>
-                </div>
-                <div>
-                  <div className="text-xs text-muted-foreground">پوند</div>
-                  <div className="font-bold text-foreground">۲۴۸,۸۷۰ تومان</div>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
