@@ -5,18 +5,13 @@ import { ArrowUp, ArrowDown } from "lucide-react"
 import Image from "next/image"
 
 const currencies = [
-  { name: "دلار آمریکا", symbol: "USD", flag: "🇺🇸", price: "۱۸۲,۸۷۰", change: 3.79, up: true },
-  { name: "یورو", symbol: "EUR", flag: "🇪🇺", price: "۲۱۵,۲۷۰", change: 3.71, up: true },
-  { name: "پوند انگلیس", symbol: "GBP", flag: "🇬🇧", price: "۲۴۸,۸۷۰", change: 3.87, up: true },
-  { name: "درهم امارات", symbol: "AED", flag: "🇦🇪", price: "۴۹,۹۲۰", change: 4.09, up: true },
-  { name: "لیر ترکیه", symbol: "TRY", flag: "🇹🇷", price: "۴,۰۳۰", change: 3.6, up: true },
-  { name: "دلار کانادا", symbol: "CAD", flag: "🇨🇦", price: "۱۳۳,۸۳۰", change: 3.78, up: true },
+  { name: "تتر", symbol: "USDT", flag: "₮", price: "۱۸۱,۳۹۰", change: 1.92, up: true },
+  { name: "پوند", symbol: "GBP", flag: "��", price: "۲۴۸,۸۷۰", change: 3.87, up: true },
+  { name: "دلار", symbol: "USD", flag: "🇸", price: "۱۸۲,۸۷۰", change: 3.79, up: true },
+  { name: "دلار کانادا", symbol: "CAD", flag: "��", price: "۱۳۳,۸۳۰", change: 3.78, up: true },
+  { name: "درهم", symbol: "AED", flag: "🇦🇪", price: "۴۹,۹۲۰", change: 4.09, up: true },
   { name: "ریال عمان", symbol: "OMR", flag: "🇴🇲", price: "۴۷۵,۶۱۰", change: 3.64, up: true },
-  { name: "یوان چین", symbol: "CNY", flag: "🇨🇳", price: "۲۶,۹۰۰", change: 3.7, up: true },
-  { name: "دلار استرالیا", symbol: "AUD", flag: "🇦🇺", price: "۱۳۲,۴۸۰", change: 3.78, up: true },
-  { name: "منات آذربایجان", symbol: "AZN", flag: "🇦🇿", price: "۱۰۷,۶۸۰", change: 3.96, up: true },
-  { name: "افغانی", symbol: "AFN", flag: "🇦🇫", price: "۲,۸۵۰", change: 3.64, up: true },
-  { name: "دینار عراق", symbol: "IQD", flag: "🇮🇶", price: "۱۳۹.۶", change: 3.41, up: true },
+  { name: "لیر ترکیه", symbol: "TRY", flag: "��", price: "۴,۰۳۰", change: 3.6, up: true },
 ]
 
 const goldCoins = [
@@ -31,7 +26,6 @@ const goldCoins = [
 ]
 
 const cryptos = [
-  { name: "تتر", symbol: "USDT", price: "۱۸۱,۳۹۰", change: 1.92, up: true },
   { name: "بیت‌کوین", symbol: "BTC", price: "$۸۱,۰۶۹", change: 0.05, up: false },
   { name: "اتریوم", symbol: "ETH", price: "$۲,۳۳۰", change: 0.98, up: false },
   { name: "سولانا", symbol: "SOL", price: "$۹۴.۷۸", change: 0.99, up: false },

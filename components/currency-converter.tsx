@@ -8,29 +8,25 @@ import Link from "next/link"
 
 const currencies = [
   { code: "IRR", name: "تومان", symbol: "🇮🇷" },
-  { code: "USD", name: "دلار آمریکا", symbol: "🇺🇸" },
-  { code: "EUR", name: "یورو", symbol: "🇪🇺" },
-  { code: "GBP", name: "پوند انگلیس", symbol: "🇬🇧" },
-  { code: "AED", name: "درهم امارات", symbol: "🇦🇪" },
-  { code: "TRY", name: "لیر ترکیه", symbol: "🇹🇷" },
-  { code: "CAD", name: "دلار کانادا", symbol: "🇨🇦" },
+  { code: "USDT", name: "تتر", symbol: "₮" },
+  { code: "GBP", name: "پوند", symbol: "🇬🇧" },
+  { code: "USD", name: "دلار", symbol: "��" },
+  { code: "CAD", name: "دلار کانادا", symbol: "��" },
+  { code: "AED", name: "درهم", symbol: "🇦🇪" },
   { code: "OMR", name: "ریال عمان", symbol: "🇴🇲" },
-  { code: "CNY", name: "یوان چین", symbol: "🇨🇳" },
-  { code: "AUD", name: "دلار استرالیا", symbol: "🇦🇺" },
+  { code: "TRY", name: "لیر ترکیه", symbol: "��" },
 ]
 
 // Exchange rates based on Telegram post data (relative to IRR/Toman)
 const rates: Record<string, number> = {
   IRR: 1,
-  USD: 182870,
-  EUR: 215270,
+  USDT: 181390,
   GBP: 248870,
-  AED: 49920,
-  TRY: 4030,
+  USD: 182870,
   CAD: 133830,
+  AED: 49920,
   OMR: 475610,
-  CNY: 26900,
-  AUD: 132480,
+  TRY: 4030,
 }
 
 export function CurrencyConverter() {
