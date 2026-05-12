@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Instagram, Send, Phone, Shield, Award } from "lucide-react"
+import { Instagram, Send, Shield, Award } from "lucide-react"
 
 export function Footer() {
   return (
@@ -80,17 +80,15 @@ export function Footer() {
               >
                 <Send className="w-5 h-5" />
               </a>
-              <a
-                href="tel:+982188881234"
-                className="w-10 h-10 bg-background/10 hover:bg-primary rounded-lg flex items-center justify-center transition-colors cursor-pointer"
-                aria-label="Phone"
-              >
-                <Phone className="w-5 h-5" />
-              </a>
             </div>
             <div className="text-background/70 text-sm space-y-1">
               <p>کانال تلگرام: <Link href="https://t.me/sarafijavaan" className="text-primary hover:underline cursor-pointer">t.me/sarafijavaan</Link></p>
               <p>ادمین: <Link href="https://t.me/javanexchang" className="text-primary hover:underline cursor-pointer">@javanexchang</Link></p>
+              <p>ایمیل: <Link href="mailto:exchangearti@gmail.com" className="text-primary hover:underline cursor-pointer">exchangearti@gmail.com</Link></p>
+              <p className="pt-2 border-t border-background/20">
+                Steinstraße 15<br />
+                20095 Hamburg, Germany
+              </p>
             </div>
           </div>
         </div>
