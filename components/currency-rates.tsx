@@ -6,12 +6,12 @@ import Image from "next/image"
 
 const currencies = [
   { name: "تتر", symbol: "USDT", flag: "₮", price: "۱۸۱,۳۹۰", change: 1.92, up: true },
-  { name: "پوند", symbol: "GBP", flag: "��", price: "۲۴۸,۸۷۰", change: 3.87, up: true },
-  { name: "دلار", symbol: "USD", flag: "🇸", price: "۱۸۲,۸۷۰", change: 3.79, up: true },
-  { name: "دلار کانادا", symbol: "CAD", flag: "��", price: "۱۳۳,۸۳۰", change: 3.78, up: true },
+  { name: "پوند", symbol: "GBP", flag: "£", price: "۲۴۸,۸۷۰", change: 3.87, up: true },
+  { name: "دلار", symbol: "USD", flag: "$", price: "۱۸۲,۸۷۰", change: 3.79, up: true },
+  { name: "دلار کانادا", symbol: "CAD", flag: "$", price: "۱۳۳,۸۳۰", change: 3.78, up: true },
   { name: "درهم", symbol: "AED", flag: "🇦🇪", price: "۴۹,۹۲۰", change: 4.09, up: true },
   { name: "ریال عمان", symbol: "OMR", flag: "🇴🇲", price: "۴۷۵,۶۱۰", change: 3.64, up: true },
-  { name: "لیر ترکیه", symbol: "TRY", flag: "��", price: "۴,۰۳۰", change: 3.6, up: true },
+  { name: "لیر ترکیه", symbol: "TRY", flag: "₺", price: "۴,۰۳۰", change: 3.6, up: true },
 ]
 
 

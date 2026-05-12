@@ -9,12 +9,12 @@ import Link from "next/link"
 const currencies = [
   { code: "IRR", name: "تومان", symbol: "🇮🇷" },
   { code: "USDT", name: "تتر", symbol: "₮" },
-  { code: "GBP", name: "پوند", symbol: "🇬🇧" },
-  { code: "USD", name: "دلار", symbol: "��" },
-  { code: "CAD", name: "دلار کانادا", symbol: "��" },
+  { code: "GBP", name: "پوند", symbol: "£" },
+  { code: "USD", name: "دلار", symbol: "$" },
+  { code: "CAD", name: "دلار کانادا", symbol: "$" },
   { code: "AED", name: "درهم", symbol: "🇦🇪" },
   { code: "OMR", name: "ریال عمان", symbol: "🇴🇲" },
-  { code: "TRY", name: "لیر ترکیه", symbol: "��" },
+  { code: "TRY", name: "لیر ترکیه", symbol: "₺" },
 ]
 
 // Exchange rates based on Telegram post data (relative to IRR/Toman)
