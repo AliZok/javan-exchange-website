@@ -45,12 +45,6 @@ export function Header() {
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
-              ورود / ثبت نام
-            </Button>
-          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -76,9 +70,6 @@ export function Header() {
                   {item.label}
                 </Link>
               ))}
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground mt-2">
-                ورود / ثبت نام
-              </Button>
             </nav>
           </div>
         )}

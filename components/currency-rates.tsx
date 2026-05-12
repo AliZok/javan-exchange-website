@@ -14,22 +14,6 @@ const currencies = [
   { name: "لیر ترکیه", symbol: "TRY", flag: "��", price: "۴,۰۳۰", change: 3.6, up: true },
 ]
 
-const goldCoins = [
-  { name: "سکه تمام جدید", price: "۱۹۹,۴۷۰,۰۰۰", change: 2.63, up: true },
-  { name: "سکه تمام قدیم", price: "۱۹۴,۳۳۰,۰۰۰", change: 2.82, up: true },
-  { name: "نیم سکه", price: "۱۰۲,۹۹۰,۰۰۰", change: 4.03, up: true },
-  { name: "ربع سکه", price: "۵۶,۰۰۰,۰۰۰", change: 3.7, up: true },
-  { name: "سکه گرمی", price: "۲۹,۰۰۰,۰۰۰", change: 3.57, up: true },
-  { name: "مثقال طلا", price: "۸۹,۱۷۰,۰۰۰", change: 2.77, up: true },
-  { name: "گرم ۱۸ عیار", price: "۲۰,۵۹۰,۰۰۰", change: 2.8, up: true },
-  { name: "اونس جهانی", price: "$۴,۶۶۸", change: 1.0, up: false },
-]
-
-const cryptos = [
-  { name: "بیت‌کوین", symbol: "BTC", price: "$۸۱,۰۶۹", change: 0.05, up: false },
-  { name: "اتریوم", symbol: "ETH", price: "$۲,۳۳۰", change: 0.98, up: false },
-  { name: "سولانا", symbol: "SOL", price: "$۹۴.۷۸", change: 0.99, up: false },
-]
 
 export function CurrencyRates() {
   return (
@@ -66,66 +50,16 @@ export function CurrencyRates() {
                     {currency.change}%
                   </div>
                 </div>
-                <div className="bg-gradient-to-l from-primary/10 to-transparent rounded-lg p-3 text-center">
-                  <div className="text-xs text-muted-foreground mb-1">قیمت (تومان)</div>
-                  <div className="font-bold text-lg text-primary">{currency.price}</div>
+                <div className="bg-gradient-to-br from-primary/20 via-primary/10 to-transparent rounded-xl p-4 text-center border border-primary/20">
+                  <div className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wide">قیمت (تومان)</div>
+                  <div className="font-bold text-xl text-primary tabular-nums">{currency.price}</div>
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        {/* Gold & Coins Section */}
-        <div className="mb-12">
-          <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
-            <span className="text-3xl">🪙</span>
-            سکه و <span className="text-primary">طلا</span>
-          </h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {goldCoins.map((item) => (
-              <Card key={item.name} className="bg-gradient-to-br from-primary/5 to-card border-primary/20 hover:shadow-lg hover:shadow-primary/10 transition-all">
-                <CardContent className="p-5">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="font-bold text-foreground">{item.name}</div>
-                    <div className={`flex items-center gap-1 text-sm font-medium ${item.up ? 'text-green-600' : 'text-red-500'}`}>
-                      {item.up ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />}
-                      {item.change}%
-                    </div>
-                  </div>
-                  <div className="font-bold text-lg text-primary">{item.price}</div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Crypto Section */}
-        <div>
-          <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
-            <span className="text-3xl">💎</span>
-            ارزهای <span className="text-primary">دیجیتال</span>
-          </h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {cryptos.map((crypto) => (
-              <Card key={crypto.symbol} className="bg-card border-border hover:shadow-lg hover:shadow-primary/10 transition-all">
-                <CardContent className="p-5">
-                  <div className="flex items-center justify-between mb-2">
-                    <div>
-                      <div className="font-bold text-foreground">{crypto.name}</div>
-                      <div className="text-sm text-muted-foreground">{crypto.symbol}</div>
-                    </div>
-                    <div className={`flex items-center gap-1 text-sm font-medium ${crypto.up ? 'text-green-600' : 'text-red-500'}`}>
-                      {crypto.up ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />}
-                      {crypto.change}%
-                    </div>
-                  </div>
-                  <div className="font-bold text-lg text-primary" dir="ltr">{crypto.price}</div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </div>
+              </div>
     </section>
   )
 }
