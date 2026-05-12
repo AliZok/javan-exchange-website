@@ -74,7 +74,7 @@ export function CurrencyConverter() {
                   <select
                     value={fromCurrency}
                     onChange={(e) => setFromCurrency(e.target.value)}
-                    className="flex-1 bg-secondary border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="flex-1 bg-secondary border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
                   >
                     {currencies.map((c) => (
                       <option key={c.code} value={c.code}>
@@ -86,7 +86,7 @@ export function CurrencyConverter() {
                     type="number"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="flex-1 bg-secondary border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-left"
+                    className="flex-1 bg-secondary border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-left cursor-pointer"
                     placeholder="مقدار"
                     dir="ltr"
                   />
@@ -99,7 +99,7 @@ export function CurrencyConverter() {
                   variant="outline"
                   size="icon"
                   onClick={swapCurrencies}
-                  className="rounded-full w-12 h-12 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                  className="rounded-full w-12 h-12 border-primary text-primary hover:bg-primary hover:text-primary-foreground cursor-pointer"
                 >
                   <ArrowLeftRight className="w-5 h-5" />
                 </Button>
@@ -114,7 +114,7 @@ export function CurrencyConverter() {
                   <select
                     value={toCurrency}
                     onChange={(e) => setToCurrency(e.target.value)}
-                    className="flex-1 bg-secondary border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="flex-1 bg-secondary border border-border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
                   >
                     {currencies.map((c) => (
                       <option key={c.code} value={c.code}>
@@ -136,7 +136,7 @@ export function CurrencyConverter() {
               </div>
 
               {/* Action Button */}
-              <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-lg py-6" asChild>
+              <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-lg py-6 cursor-pointer" asChild>
                 <Link href="https://t.me/javanexchang" target="_blank">
                   <Send className="w-5 h-5 ml-2" />
                   ثبت درخواست در تلگرام

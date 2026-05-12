@@ -36,22 +36,22 @@ export function Footer() {
             <h4 className="font-bold text-lg mb-4 text-primary">دسترسی سریع</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="#rates" className="text-background/70 hover:text-primary transition-colors">
+                <Link href="#rates" className="text-background/70 hover:text-primary transition-colors cursor-pointer">
                   نرخ ارز
                 </Link>
               </li>
               <li>
-                <Link href="#converter" className="text-background/70 hover:text-primary transition-colors">
+                <Link href="#converter" className="text-background/70 hover:text-primary transition-colors cursor-pointer">
                   تبدیل ارز
                 </Link>
               </li>
               <li>
-                <Link href="#services" className="text-background/70 hover:text-primary transition-colors">
+                <Link href="#services" className="text-background/70 hover:text-primary transition-colors cursor-pointer">
                   خدمات ما
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="text-background/70 hover:text-primary transition-colors">
+                <Link href="#contact" className="text-background/70 hover:text-primary transition-colors cursor-pointer">
                   تماس با ما
                 </Link>
               </li>
@@ -66,7 +66,7 @@ export function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-background/10 hover:bg-primary rounded-lg flex items-center justify-center transition-colors"
+                className="w-10 h-10 bg-background/10 hover:bg-primary rounded-lg flex items-center justify-center transition-colors cursor-pointer"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
@@ -75,22 +75,22 @@ export function Footer() {
                 href="https://t.me/sarafijavaan"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-background/10 hover:bg-primary rounded-lg flex items-center justify-center transition-colors"
+                className="w-10 h-10 bg-background/10 hover:bg-primary rounded-lg flex items-center justify-center transition-colors cursor-pointer"
                 aria-label="Telegram"
               >
                 <Send className="w-5 h-5" />
               </a>
               <a
                 href="tel:+982188881234"
-                className="w-10 h-10 bg-background/10 hover:bg-primary rounded-lg flex items-center justify-center transition-colors"
+                className="w-10 h-10 bg-background/10 hover:bg-primary rounded-lg flex items-center justify-center transition-colors cursor-pointer"
                 aria-label="Phone"
               >
                 <Phone className="w-5 h-5" />
               </a>
             </div>
             <div className="text-background/70 text-sm space-y-1">
-              <p>کانال تلگرام: <Link href="https://t.me/sarafijavaan" className="text-primary hover:underline">t.me/sarafijavaan</Link></p>
-              <p>ادمین: <Link href="https://t.me/javanexchang" className="text-primary hover:underline">@javanexchang</Link></p>
+              <p>کانال تلگرام: <Link href="https://t.me/sarafijavaan" className="text-primary hover:underline cursor-pointer">t.me/sarafijavaan</Link></p>
+              <p>ادمین: <Link href="https://t.me/javanexchang" className="text-primary hover:underline cursor-pointer">@javanexchang</Link></p>
             </div>
           </div>
         </div>

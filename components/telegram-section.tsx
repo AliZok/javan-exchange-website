@@ -41,7 +41,7 @@ export function TelegramSection() {
                   <span>پیشنهادهای ویژه برای اعضا</span>
                 </div>
               </div>
-              <Button asChild className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+              <Button asChild className="w-full bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer">
                 <Link href="https://t.me/sarafijavaan" target="_blank">
                   <Send className="w-5 h-5 ml-2" />
                   t.me/sarafijavaan
@@ -72,7 +72,7 @@ export function TelegramSection() {
                   <span>مشاوره رایگان معاملات</span>
                 </div>
               </div>
-              <Button asChild variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              <Button asChild variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground cursor-pointer">
                 <Link href="https://t.me/javanexchang" target="_blank">
                   <MessageCircle className="w-5 h-5 ml-2" />
                   @javanexchang

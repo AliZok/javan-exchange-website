@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { smoothScroll } from "@/lib/smooth-scroll"
 
 const navItems = [
   { label: "صفحه اصلی", href: "#" },
@@ -35,13 +36,16 @@ export function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <Link
+              <button
                 key={item.label}
-                href={item.href}
-                className="text-foreground/80 hover:text-primary transition-colors font-medium"
+                onClick={(e) => {
+                  e.preventDefault()
+                  smoothScroll(item.href)
+                }}
+                className="text-foreground/80 hover:text-primary transition-colors font-medium cursor-pointer"
               >
                 {item.label}
-              </Link>
+              </button>
             ))}
           </nav>
 
@@ -61,14 +65,17 @@ export function Header() {
           <div className="md:hidden py-4 border-t border-border">
             <nav className="flex flex-col gap-4">
               {navItems.map((item) => (
-                <Link
+                <button
                   key={item.label}
-                  href={item.href}
-                  className="text-foreground/80 hover:text-primary transition-colors font-medium py-2"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    smoothScroll(item.href)
+                    setMobileMenuOpen(false)
+                  }}
+                  className="text-foreground/80 hover:text-primary transition-colors font-medium py-2 text-right cursor-pointer"
                 >
                   {item.label}
-                </Link>
+                </button>
               ))}
             </nav>
           </div>
