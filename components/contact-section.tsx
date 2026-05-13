@@ -28,13 +28,13 @@ export function ContactSection() {
                   </div>
                   <div>
                     <h3 className="font-bold text-foreground mb-1">آدرس</h3>
-                    <p className="text-muted-foreground">تهران، خیابان ولیعصر، نرسیده به میدان ونک، پلاک ۱۲۳</p>
+                    <p className="text-muted-foreground">Steinstraße 15<br />20095 Hamburg, Germany</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-card border-border">
+            {/* <Card className="bg-card border-border">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -47,7 +47,7 @@ export function ContactSection() {
                   </div>
                 </div>
               </CardContent>
-            </Card>
+            </Card> */}
 
             <Card className="bg-card border-border">
               <CardContent className="p-6">
@@ -57,7 +57,7 @@ export function ContactSection() {
                   </div>
                   <div>
                     <h3 className="font-bold text-foreground mb-1">ایمیل</h3>
-                    <p className="text-muted-foreground" dir="ltr">info@javan-exchange.ir</p>
+                    <p className="text-muted-foreground" dir="ltr">exchangearti@gmail.com</p>
                   </div>
                 </div>
               </CardContent>
