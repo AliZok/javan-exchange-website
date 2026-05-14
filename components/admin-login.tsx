@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { supabase } from "@/lib/supabase"
 
 interface AdminLoginProps {
   onLogin: (username: string, password: string) => void
@@ -13,13 +14,27 @@ interface AdminLoginProps {
 export function AdminLogin({ onLogin }: AdminLoginProps) {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (username === "admin" && password === "admin") {
-      onLogin(username, password)
-    } else {
-      alert("نام کاربری یا رمز عبور اشتباه است")
+    setIsLoading(true)
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: username,
+        password: password
+      })
+
+      if (error) {
+        alert(error.message)
+      } else if (data.user) {
+        onLogin(username, password)
+      }
+    } catch (err) {
+      alert("خطا در ارتباط با سرور")
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -53,8 +68,8 @@ export function AdminLogin({ onLogin }: AdminLoginProps) {
                 required
               />
             </div>
-            <Button type="submit" className="w-full">
-              ورود
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? "در حال ورود..." : "ورود"}
             </Button>
           </form>
         </CardContent>
