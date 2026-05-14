@@ -79,7 +79,7 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
     // Insert each currency into the database
     for (const currency of updatedCurrencies) {
       try {
-        const response = await fetch('/api/currencies', {
+        const response = await fetch('/api/javen-ex-currencies', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
