@@ -9,6 +9,7 @@ import { ArrowUp, ArrowDown, LogOut } from "lucide-react"
 
 interface CurrencyRate {
   name: string
+  name_en: string
   symbol: string
   flag: string
   price: string
@@ -21,19 +22,21 @@ interface AdminDashboardProps {
 }
 
 const initialCurrencies: CurrencyRate[] = [
-  { name: "تتر", symbol: "USDT", flag: "₮", price: "۱۸۱,۳۹۰", change: 1.92, up: true },
-  { name: "پوند", symbol: "GBP", flag: "£", price: "۲۴۸,۸۷۰", change: 3.87, up: true },
-  { name: "دلار", symbol: "USD", flag: "$", price: "۱۸۲,۸۷۰", change: 3.79, up: true },
-  { name: "دلار کانادا", symbol: "CAD", flag: "$", price: "۱۳۳,۸۳۰", change: 3.78, up: true },
-  { name: "درهم", symbol: "AED", flag: "🇦🇪", price: "۴۹,۹۲۰", change: 4.09, up: true },
-  { name: "ریال عمان", symbol: "OMR", flag: "🇴🇲", price: "۴۷۵,۶۱۰", change: 3.64, up: true },
-  { name: "لیر ترکیه", symbol: "TRY", flag: "₺", price: "۴,۰۳۰", change: 3.6, up: true },
+  { name: "تتر", name_en: "Tether", symbol: "USDT", flag: "₮", price: "۱۸۱,۳۹۰", change: 1.92, up: true },
+  { name: "پوند", name_en: "British Pound", symbol: "GBP", flag: "£", price: "۲۴۸,۸۷۰", change: 3.87, up: true },
+  { name: "دلار", name_en: "US Dollar", symbol: "USD", flag: "$", price: "۱۸۲,۸۷۰", change: 3.79, up: true },
+  { name: "دلار کانادا", name_en: "Canadian Dollar", symbol: "CAD", flag: "$", price: "۱۳۳,۸۳۰", change: 3.78, up: true },
+  { name: "درهم", name_en: "UAE Dirham", symbol: "AED", flag: "🇦🇪", price: "۴۹,۹۲۰", change: 4.09, up: true },
+  { name: "ریال عمان", name_en: "Omani Rial", symbol: "OMR", flag: "🇴🇲", price: "۴۷۵,۶۱۰", change: 3.64, up: true },
+  { name: "لیر ترکیه", name_en: "Turkish Lira", symbol: "TRY", flag: "₺", price: "۴,۰۳۰", change: 3.6, up: true },
 ]
 
 export function AdminDashboard({ onLogout }: AdminDashboardProps) {
   const [currencies, setCurrencies] = useState<CurrencyRate[]>(initialCurrencies)
   const [newPrices, setNewPrices] = useState<{ [key: string]: string }>({})
   const [percentageChanges, setPercentageChanges] = useState<{ [key: string]: string }>({})
+  const [newNameEn, setNewNameEn] = useState<{ [key: string]: string }>({})
+  const [newIconPath, setNewIconPath] = useState<{ [key: string]: string }>({})
 
   const handlePriceChange = (symbol: string, value: string) => {
     setNewPrices(prev => ({ ...prev, [symbol]: value }))
@@ -43,16 +46,28 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
     setPercentageChanges(prev => ({ ...prev, [symbol]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleNameEnChange = (symbol: string, value: string) => {
+    setNewNameEn(prev => ({ ...prev, [symbol]: value }))
+  }
+
+  const handleIconPathChange = (symbol: string, value: string) => {
+    setNewIconPath(prev => ({ ...prev, [symbol]: value }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
     const updatedCurrencies = currencies.map(currency => {
       const newPrice = newPrices[currency.symbol]
       const percentageChange = percentageChanges[currency.symbol]
+      const newNameEnValue = newNameEn[currency.symbol]
+      const newIconPathValue = newIconPath[currency.symbol]
       
-      if (newPrice || percentageChange) {
+      if (newPrice || percentageChange || newNameEnValue || newIconPathValue) {
         return {
           ...currency,
+          name_en: newNameEnValue || currency.name_en,
+          flag: newIconPathValue || currency.flag,
           price: newPrice || currency.price,
           change: percentageChange ? parseFloat(percentageChange) : currency.change,
           up: percentageChange ? parseFloat(percentageChange) >= 0 : currency.up
@@ -61,13 +76,44 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
       return currency
     })
 
+    // Insert each currency into the database
+    for (const currency of updatedCurrencies) {
+      try {
+        const response = await fetch('/api/currencies', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: currency.name,
+            name_en: currency.name_en,
+            icon_path: currency.flag,
+            price: currency.price,
+            change_percent: currency.change
+          })
+        })
+
+        if (!response.ok) {
+          const error = await response.json()
+          console.error('Error inserting currency:', error)
+          alert(`خطا در ثبت ${currency.name}: ${error.error}`)
+          return
+        }
+      } catch (error) {
+        console.error('Error inserting currency:', error)
+        alert(`خطا در ثبت ${currency.name}`)
+        return
+      }
+    }
+
     setCurrencies(updatedCurrencies)
-    
-    alert("مرحله بعد: برای ثبت در دیتابیس آماده است!")
+    alert("تغییرات با موفقیت ثبت شد!")
     
     // Clear form inputs
     setNewPrices({})
     setPercentageChanges({})
+    setNewNameEn({})
+    setNewIconPath({})
   }
 
   return (
@@ -95,7 +141,27 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid md:grid-cols-3 gap-4">
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor={`name-en-${currency.symbol}`}>نام انگلیسی</Label>
+                      <Input
+                        id={`name-en-${currency.symbol}`}
+                        type="text"
+                        placeholder={currency.name_en}
+                        value={newNameEn[currency.symbol] || ""}
+                        onChange={(e) => handleNameEnChange(currency.symbol, e.target.value)}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor={`icon-path-${currency.symbol}`}>مسیر آیکون</Label>
+                      <Input
+                        id={`icon-path-${currency.symbol}`}
+                        type="text"
+                        placeholder={currency.flag}
+                        value={newIconPath[currency.symbol] || ""}
+                        onChange={(e) => handleIconPathChange(currency.symbol, e.target.value)}
+                      />
+                    </div>
                     <div className="space-y-2">
                       <Label htmlFor={`price-${currency.symbol}`}>قیمت جدید (تومان)</Label>
                       <Input
@@ -120,14 +186,14 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
                         مثبت: افزایش قیمت | منفی: کاهش قیمت
                       </p>
                     </div>
-                    <div className="flex items-end">
-                      <div className="text-center p-4 bg-muted rounded-lg">
-                        <div className="text-sm text-muted-foreground mb-1">وضعیت فعلی</div>
-                        <div className="font-bold text-lg">{currency.price}</div>
-                        <div className={`flex items-center gap-1 justify-center text-sm font-medium ${currency.up ? 'text-green-600' : 'text-red-500'}`}>
-                          {currency.up ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />}
-                          {currency.change}%
-                        </div>
+                  </div>
+                  <div className="mt-4">
+                    <div className="text-center p-4 bg-muted rounded-lg">
+                      <div className="text-sm text-muted-foreground mb-1">وضعیت فعلی</div>
+                      <div className="font-bold text-lg">{currency.price}</div>
+                      <div className={`flex items-center gap-1 justify-center text-sm font-medium ${currency.up ? 'text-green-600' : 'text-red-500'}`}>
+                        {currency.up ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />}
+                        {currency.change}%
                       </div>
                     </div>
                   </div>
