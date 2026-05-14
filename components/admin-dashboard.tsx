@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ArrowUp, ArrowDown, LogOut } from "lucide-react"
+import { supabase } from "@/lib/supabase"
 
 interface CurrencyRate {
   name: string
@@ -76,27 +77,35 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
       return currency
     })
 
-    // Insert each currency into the database
+    // Insert each currency into the database using Supabase directly
     for (const currency of updatedCurrencies) {
       try {
-        const response = await fetch('/api/javen-ex-currencies', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: currency.name,
-            name_en: currency.name_en,
-            icon_path: currency.flag,
-            price: currency.price,
-            change_percent: currency.change
-          })
-        })
+        // Convert Persian numerals to standard numerals and remove commas
+        const convertPersianToEnglish = (str: string) => {
+          const persianNumerals = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']
+          const englishNumerals = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+          let result = str.replace(/,/g, '')
+          for (let i = 0; i < persianNumerals.length; i++) {
+            result = result.replace(new RegExp(persianNumerals[i], 'g'), englishNumerals[i])
+          }
+          return result
+        }
 
-        if (!response.ok) {
-          const error = await response.json()
-          console.error('Error inserting currency:', error)
-          alert(`خطا در ثبت ${currency.name}: ${error.error}`)
+        const { data, error } = await supabase
+          .from('javan-ex-currencies')
+          .insert([
+            {
+              name: currency.name,
+              name_en: currency.name_en,
+              icon_path: currency.flag,
+              price: convertPersianToEnglish(currency.price),
+              change_percent: currency.change
+            }
+          ])
+
+        if (error) {
+          console.error('Supabase error:', error)
+          alert(`خطا در ثبت ${currency.name}: ${error.message}`)
           return
         }
       } catch (error) {

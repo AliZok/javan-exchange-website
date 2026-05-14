@@ -15,9 +15,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Insert into javen-ex-currencies table
+    // Insert into javan-ex-currencies table
     const { data, error } = await supabase
-      .from('javen-ex-currencies')
+      .from('javan-ex-currencies')
       .insert([
         {
           name,
