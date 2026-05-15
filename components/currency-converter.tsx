@@ -1,10 +1,19 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ArrowLeftRight, Send } from "lucide-react"
 import Link from "next/link"
+import { supabase } from "@/lib/supabase"
+
+interface Currency {
+  name: string
+  name_en: string
+  icon_path: string
+  price: string
+  change_percent: number
+}
 
 const currencies = [
   { code: "IRR", name: "تومان", symbol: "🇮🇷" },
@@ -17,22 +26,68 @@ const currencies = [
   { code: "TRY", name: "لیر ترکیه", symbol: "₺" },
 ]
 
-// Exchange rates based on Telegram post data (relative to IRR/Toman)
-const rates: Record<string, number> = {
-  IRR: 1,
-  USDT: 181390,
-  GBP: 248870,
-  USD: 182870,
-  CAD: 133830,
-  AED: 49920,
-  OMR: 475610,
-  TRY: 4030,
-}
-
 export function CurrencyConverter() {
   const [fromCurrency, setFromCurrency] = useState("USD")
   const [toCurrency, setToCurrency] = useState("IRR")
   const [amount, setAmount] = useState("100")
+  const [rates, setRates] = useState<Record<string, number>>({
+    IRR: 1,
+    USDT: 181390,
+    GBP: 248870,
+    USD: 182870,
+    CAD: 133830,
+    AED: 49920,
+    OMR: 475610,
+    TRY: 4030,
+  })
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchCurrencies()
+  }, [])
+
+  const fetchCurrencies = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('javan-ex-currencies')
+        .select('*')
+
+      if (error) {
+        console.error('Error fetching currencies:', error)
+        return
+      }
+
+      if (data) {
+        const newRates: Record<string, number> = {
+          IRR: 1,
+        }
+        
+        data.forEach((currency: Currency) => {
+          // Map name_en to currency code
+          const codeMap: Record<string, string> = {
+            'Tether': 'USDT',
+            'British Pound': 'GBP',
+            'US Dollar': 'USD',
+            'Canadian Dollar': 'CAD',
+            'UAE Dirham': 'AED',
+            'Omani Rial': 'OMR',
+            'Turkish Lira': 'TRY',
+          }
+          
+          const code = codeMap[currency.name_en]
+          if (code) {
+            newRates[code] = parseFloat(currency.price)
+          }
+        })
+        
+        setRates(newRates)
+      }
+    } catch (error) {
+      console.error('Error fetching currencies:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const convertedAmount = () => {
     const numAmount = parseFloat(amount) || 0
