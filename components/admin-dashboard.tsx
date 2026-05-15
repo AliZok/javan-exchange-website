@@ -76,7 +76,6 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
       }
       return currency
     })
-
     // Convert Persian numerals to standard numerals and remove commas
     const convertPersianToEnglish = (str: string) => {
       const persianNumerals = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']
