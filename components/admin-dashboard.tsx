@@ -77,42 +77,41 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
       return currency
     })
 
-    // Insert each currency into the database using Supabase directly
-    for (const currency of updatedCurrencies) {
-      try {
-        // Convert Persian numerals to standard numerals and remove commas
-        const convertPersianToEnglish = (str: string) => {
-          const persianNumerals = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']
-          const englishNumerals = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-          let result = str.replace(/,/g, '')
-          for (let i = 0; i < persianNumerals.length; i++) {
-            result = result.replace(new RegExp(persianNumerals[i], 'g'), englishNumerals[i])
-          }
-          return result
-        }
+    // Convert Persian numerals to standard numerals and remove commas
+    const convertPersianToEnglish = (str: string) => {
+      const persianNumerals = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']
+      const englishNumerals = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+      let result = str.replace(/,/g, '')
+      for (let i = 0; i < persianNumerals.length; i++) {
+        result = result.replace(new RegExp(persianNumerals[i], 'g'), englishNumerals[i])
+      }
+      return result
+    }
 
-        const { data, error } = await supabase
-          .from('javan-ex-currencies')
-          .insert([
-            {
-              name: currency.name,
-              name_en: currency.name_en,
-              icon_path: currency.flag,
-              price: convertPersianToEnglish(currency.price),
-              change_percent: currency.change
-            }
-          ])
+    // Prepare all currencies for insertion
+    const currenciesToInsert = updatedCurrencies.map(currency => ({
+      name: currency.name,
+      name_en: currency.name_en,
+      icon_path: currency.flag,
+      price: convertPersianToEnglish(currency.price),
+      change_percent: currency.change
+    }))
 
-        if (error) {
-          console.error('Supabase error:', error)
-          alert(`خطا در ثبت ${currency.name}: ${error.message}`)
-          return
-        }
-      } catch (error) {
-        console.error('Error inserting currency:', error)
-        alert(`خطا در ثبت ${currency.name}`)
+    // Insert all currencies in one API call
+    try {
+      const { data, error } = await supabase
+        .from('javan-ex-currencies')
+        .insert(currenciesToInsert)
+
+      if (error) {
+        console.error('Supabase error:', error)
+        alert(`خطا در ثبت ارزها: ${error.message}`)
         return
       }
+    } catch (error) {
+      console.error('Error inserting currencies:', error)
+      alert('خطا در ثبت ارزها')
+      return
     }
 
     setCurrencies(updatedCurrencies)
