@@ -119,15 +119,16 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
     const convertPersianToEnglish = (str: string) => {
       const persianNumerals = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']
       const englishNumerals = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-      let result = str.replace(/,/g, '')
+      let result = str.replace(/,/g, '').replace(/٬/g, '')
       for (let i = 0; i < persianNumerals.length; i++) {
         result = result.replace(new RegExp(persianNumerals[i], 'g'), englishNumerals[i])
       }
       return result
     }
 
-    // Prepare all currencies for insertion
-    const currenciesToInsert = updatedCurrencies.map(currency => ({
+    // Prepare all currencies for upsert
+    const currenciesToUpsert = updatedCurrencies.map(currency => ({
+      id: currency.id,
       name: currency.name,
       name_en: currency.name_en,
       icon_path: currency.flag,
@@ -135,11 +136,11 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
       change_percent: currency.change
     }))
 
-    // Insert all currencies in one API call
+    // Upsert all currencies in one API call
     try {
       const { data, error } = await supabase
         .from('javan-ex-currencies')
-        .insert(currenciesToInsert)
+        .upsert(currenciesToUpsert, { onConflict: 'id' })
 
       if (error) {
         console.error('Supabase error:', error)
