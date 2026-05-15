@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -16,28 +16,67 @@ interface CurrencyRate {
   price: string
   change: number
   up: boolean
+  id?: string
 }
 
 interface AdminDashboardProps {
   onLogout: () => void
 }
 
-const initialCurrencies: CurrencyRate[] = [
-  { name: "تتر", name_en: "Tether", symbol: "USDT", flag: "₮", price: "۱۸۱,۳۹۰", change: 1.92, up: true },
-  { name: "پوند", name_en: "British Pound", symbol: "GBP", flag: "£", price: "۲۴۸,۸۷۰", change: 3.87, up: true },
-  { name: "دلار", name_en: "US Dollar", symbol: "USD", flag: "$", price: "۱۸۲,۸۷۰", change: 3.79, up: true },
-  { name: "دلار کانادا", name_en: "Canadian Dollar", symbol: "CAD", flag: "$", price: "۱۳۳,۸۳۰", change: 3.78, up: true },
-  { name: "درهم", name_en: "UAE Dirham", symbol: "AED", flag: "🇦🇪", price: "۴۹,۹۲۰", change: 4.09, up: true },
-  { name: "ریال عمان", name_en: "Omani Rial", symbol: "OMR", flag: "🇴🇲", price: "۴۷۵,۶۱۰", change: 3.64, up: true },
-  { name: "لیر ترکیه", name_en: "Turkish Lira", symbol: "TRY", flag: "₺", price: "۴,۰۳۰", change: 3.6, up: true },
-]
-
 export function AdminDashboard({ onLogout }: AdminDashboardProps) {
-  const [currencies, setCurrencies] = useState<CurrencyRate[]>(initialCurrencies)
+  const [currencies, setCurrencies] = useState<CurrencyRate[]>([])
+  const [loading, setLoading] = useState(true)
   const [newPrices, setNewPrices] = useState<{ [key: string]: string }>({})
   const [percentageChanges, setPercentageChanges] = useState<{ [key: string]: string }>({})
   const [newNameEn, setNewNameEn] = useState<{ [key: string]: string }>({})
   const [newIconPath, setNewIconPath] = useState<{ [key: string]: string }>({})
+
+  useEffect(() => {
+    fetchCurrencies()
+  }, [])
+
+  const formatPrice = (price: string | number) => {
+    const priceStr = String(price)
+    const englishNumerals = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    const persianNumerals = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹']
+    let result = priceStr
+    for (let i = 0; i < englishNumerals.length; i++) {
+      result = result.replace(new RegExp(englishNumerals[i], 'g'), persianNumerals[i])
+    }
+    const numericValue = parseInt(priceStr.replace(/,/g, ''))
+    return numericValue.toLocaleString('fa-IR')
+  }
+
+  const fetchCurrencies = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('javan-ex-currencies')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+      if (error) {
+        console.error('Error fetching currencies:', error)
+        return
+      }
+
+      const convertedCurrencies = (data || []).map((item: any) => ({
+        id: item.id,
+        name: item.name,
+        name_en: item.name_en,
+        symbol: item.name_en.split(' ')[0] || item.name_en,
+        flag: item.icon_path || '💱',
+        price: formatPrice(item.price),
+        change: item.change_percent,
+        up: item.change_percent >= 0
+      }))
+
+      setCurrencies(convertedCurrencies)
+    } catch (error) {
+      console.error('Error fetching currencies:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const handlePriceChange = (symbol: string, value: string) => {
     setNewPrices(prev => ({ ...prev, [symbol]: value }))
@@ -134,10 +173,15 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
           </Button>
         </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="grid gap-6">
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="text-muted-foreground">در حال بارگذاری ارزها...</div>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div className="grid gap-6">
             {currencies.map((currency) => (
-              <Card key={currency.symbol}>
+              <Card key={currency.id || currency.symbol}>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-3">
                     <span className="text-2xl">{currency.flag}</span>
@@ -215,6 +259,7 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
             </Button>
           </div>
         </form>
+        )}
       </div>
     </div>
   )
