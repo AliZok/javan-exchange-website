@@ -5,17 +5,24 @@ export const supabaseConfig = {
   anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_XIVFiG7vu6XwGdEOxC3QcQ_Eyq6eEFP",
 }
 
+const storageAdapter = typeof window !== 'undefined' ? window.localStorage : {
+  getItem: () => null,
+  setItem: () => {},
+  removeItem: () => {}
+}
+
 export const supabase = createClient(
   supabaseConfig.url,
   supabaseConfig.anonKey,
   {
     auth: {
       persistSession: true,
-      storage: window.localStorage,
+      storage: storageAdapter,
       autoRefreshToken: true,
       detectSessionInUrl: false,
       sessionStorage: {
         getItem: (key: string) => {
+          if (typeof window === 'undefined') return null
           const data = window.localStorage.getItem(key)
           if (!data) return null
           const parsed = JSON.parse(data)
@@ -27,12 +34,14 @@ export const supabase = createClient(
           return data
         },
         setItem: (key: string, value: string) => {
+          if (typeof window === 'undefined') return
           const parsed = JSON.parse(value)
           // Set expiry to 1 day from now
           parsed.expires_at = Math.floor(Date.now() / 1000) + (24 * 60 * 60)
           window.localStorage.setItem(key, JSON.stringify(parsed))
         },
         removeItem: (key: string) => {
+          if (typeof window === 'undefined') return
           window.localStorage.removeItem(key)
         }
       }
