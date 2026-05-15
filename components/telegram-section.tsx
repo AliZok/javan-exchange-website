@@ -7,7 +7,7 @@ import { Send, Users, Bell, MessageCircle } from "lucide-react"
 
 export function TelegramSection() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-foreground via-foreground/95 to-foreground/90 text-background">
+    <section className="py-16 pt-8 md:py-24 md:pt-16 bg-gradient-to-br from-foreground via-foreground/95 to-foreground/90 text-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">

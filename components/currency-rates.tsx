@@ -59,7 +59,7 @@ export function CurrencyRates() {
   }
 
   return (
-    <section id="rates" className="py-16 md:py-24 bg-muted/30">
+    <section id="rates" className="py-16 pt-8 md:py-24 md:pt-16 bg-muted/30">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
