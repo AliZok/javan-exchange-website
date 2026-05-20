@@ -11,6 +11,9 @@ const vazirmatn = Vazirmatn({
 export const metadata: Metadata = {
   title: 'صرافی جوان | تبدیل ارز با بهترین نرخ',
   description: 'صرافی جوان - خرید و فروش ارز، حواله های ارزی، تبدیل ارز با بهترین نرخ روز',
+  // verification: {
+  //   google: 'کد_تایید_گوگل_شما',
+  // },
 }
 
 export default function RootLayout({
