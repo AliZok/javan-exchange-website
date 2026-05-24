@@ -125,7 +125,7 @@ export function CurrencyConverter() {
                 <label className="block text-sm font-medium text-muted-foreground mb-2">
                   از ارز
                 </label>
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <select
                     value={fromCurrency}
                     onChange={(e) => setFromCurrency(e.target.value)}
@@ -165,7 +165,7 @@ export function CurrencyConverter() {
                 <label className="block text-sm font-medium text-muted-foreground mb-2">
                   به ارز
                 </label>
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <select
                     value={toCurrency}
                     onChange={(e) => setToCurrency(e.target.value)}
