@@ -11,9 +11,9 @@ const vazirmatn = Vazirmatn({
 export const metadata: Metadata = {
   title: 'صرافی جوان | تبدیل ارز با بهترین نرخ',
   description: 'صرافی جوان - خرید و فروش ارز، حواله های ارزی، تبدیل ارز با بهترین نرخ روز',
-  icons: {
-    icon: '/icon.png',
-  },
+  // icons: {
+  //   icon: '/icon.png',
+  // },
   openGraph: {
     title: 'صرافی جوان | تبدیل ارز با بهترین نرخ',
     description: 'صرافی جوان - خرید و فروش ارز، حواله های ارزی، تبدیل ارز با بهترین نرخ روز',
