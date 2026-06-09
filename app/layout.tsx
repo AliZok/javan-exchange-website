@@ -3,7 +3,7 @@ import { Vazirmatn } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const vazirmatn = Vazirmatn({ 
+const vazirmatn = Vazirmatn({
   subsets: ['arabic'],
   variable: '--font-vazirmatn'
 })
@@ -25,6 +25,35 @@ export const metadata: Metadata = {
         alt: 'صرافی جوان',
       },
     ],
+  },
+  // twitter: {
+  //   card: 'summary_large_image',
+  //   title: 'صرافی آرین | Aryan Exchange',
+  //   description: 'ارز دیجیتال، صرافی آنلاین، انتقال پول و کارت ویزا - خدمات جامع مالی در آرین اکسچنج',
+  //   images: ['https://www.aryan-exchange.com/aryan-exchange-logo-square.png'],
+  // },
+  icons: {
+    icon: [
+      {
+        url: '/icon-light-32x32.png',
+        media: '(prefers-color-scheme: light)',
+      },
+      {
+        url: '/icon-dark-32x32.png',
+        media: '(prefers-color-scheme: dark)',
+      },
+      {
+        url: '/icon.svg',
+        type: 'image/svg+xml',
+      },
+      {
+        url: '/aryan-exchange-logo-square-without-bg.png',
+        // url: '/icon-new.png',
+        type: 'image/png',
+        sizes: 'any',
+      },
+    ],
+    apple: '/apple-icon.png',
   },
   // verification: {
   //   google: 'کد_تایید_گوگل_شما',
