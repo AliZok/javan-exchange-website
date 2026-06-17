@@ -43,12 +43,12 @@ export const metadata: Metadata = {
         media: '(prefers-color-scheme: dark)',
       },
       {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
+        url: '/icon.png',
+        type: 'image/png',
       },
       {
-        url: '/aryan-exchange-logo-square-without-bg.png',
-        // url: '/icon-new.png',
+        // url: '/aryan-exchange-logo-square-without-bg.png',
+        url: '/icon.png',
         type: 'image/png',
         sizes: 'any',
       },
