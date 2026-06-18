@@ -35,25 +35,20 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
         url: '/icon.png',
         type: 'image/png',
       },
       {
-        // url: '/aryan-exchange-logo-square-without-bg.png',
-        url: '/icon.png',
+        url: '/icon-test.png',
         type: 'image/png',
-        sizes: 'any',
+      },
+      {
+        url: '/placeholder-logo.png',
+        type: 'image/png',
+        sizes: '180x180',
       },
     ],
-    apple: '/apple-icon.png',
+    apple: '/placeholder-logo.png',
   },
   // verification: {
   //   google: 'کد_تایید_گوگل_شما',
