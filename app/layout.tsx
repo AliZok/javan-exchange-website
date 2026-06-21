@@ -9,6 +9,7 @@ const vazirmatn = Vazirmatn({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.javan-exchange.site'),
   title: 'صرافی جوان | تبدیل ارز با بهترین نرخ',
   description: 'صرافی جوان - خرید و فروش ارز، حواله های ارزی، تبدیل ارز با بهترین نرخ روز',
   // icons: {
@@ -17,9 +18,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'صرافی جوان | تبدیل ارز با بهترین نرخ',
     description: 'صرافی جوان - خرید و فروش ارز، حواله های ارزی، تبدیل ارز با بهترین نرخ روز',
+    url: 'https://www.javan-exchange.site',
+     siteName: 'صرافی جوان',
     images: [
       {
-        url: '/images/logo.jpg',
+        url: 'https://www.javan-exchange.site/images/logo.jpg',
         width: 1200,
         height: 630,
         alt: 'صرافی جوان',
@@ -35,7 +38,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/icon.png',
+        url: '/icon-without-bg.png',
         type: 'image/png',
       },
       {
